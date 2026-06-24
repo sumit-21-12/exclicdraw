@@ -49,16 +49,25 @@ return res.json({
 })
 
 
-app.post("/room", middleware,(req,res)=>{
+app.post("/room",  middleware, async(req,res)=>{
 
 
-    const data=CreateUserSchema.safeParse(req.body);
+    const parseddata=CreateUserSchema.safeParse(req.body);
 
-    if(!data.success){
+
+    if(!parseddata.success){
         return res.json({
             message:"incorrect"
         })
     }
+    const usrId=req.userId;
+
+    await prisma.room.create({
+        data:{
+            slug:parseddata.data.name,
+            adminId:userId
+        }
+    })
 
     res.json({
         roomId:123

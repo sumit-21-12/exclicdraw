@@ -25,7 +25,7 @@ app.post("/signup",(req,res)=>{
         data:{
             email:parseddata.data,
             password:parseddata.data,
-            name:parseddata.data
+            name:parseddata.data 
         }
     })
 
@@ -65,7 +65,7 @@ app.post("/room",  middleware, async(req,res)=>{
     await prisma.room.create({
         data:{
             slug:parseddata.data.name,
-            adminId:userId 
+            adminId:userId
         } 
     })
 
